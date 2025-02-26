@@ -11,6 +11,9 @@ concurrency:
   group: 'profile-3d'
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
