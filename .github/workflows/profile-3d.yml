@@ -2,17 +2,10 @@ name: GitHub 3D Contribution Calendar
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs every day at midnight
+    - cron: '0 18 * * *' # Runs at 18:00 UTC (03:00 JST)
   workflow_dispatch:
   push:
     branches: [main]
-
-concurrency:
-  group: 'profile-3d'
-  cancel-in-progress: true
-
-permissions:
-  contents: write
 
 jobs:
   build:
@@ -20,9 +13,14 @@ jobs:
     name: generate-github-profile-3d-contrib
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate 3D Contribution Calendar
+        uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          MAX_REPOS: 250
+          SETTING_JSON: settings.json
 
       - name: Create settings file
         run: |
@@ -36,53 +34,19 @@ jobs:
             }
           }' > settings.json
 
-      - name: Generate 3D Contribution Calendar
-        uses: yoshi389111/github-profile-3d-contrib@0.7.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
-          MAX_REPOS: 250
-          SETTING_JSON: settings.json
-
       - name: Verify Generated Files
         run: |
           if [ ! -d "profile-3d-contrib" ]; then
             echo "Error: profile-3d-contrib directory not found!"
             exit 1
           fi
-
-          echo "📁 Directory contents:"
+          echo "Generated files:"
           ls -la profile-3d-contrib/
-
-          SVG_COUNT=$(find profile-3d-contrib/ -type f -name "*.svg" | wc -l)
-          echo "🎨 Found $SVG_COUNT SVG files:"
-          find profile-3d-contrib/ -type f -name "*.svg"
-
-          if [ $SVG_COUNT -eq 0 ]; then
-            echo "Error: No SVG files were generated!"
-            exit 1
-          fi
-
-      - name: Setup Git Config
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Commit & Push
         run: |
-          # Ensure we're on the main branch
-          git checkout main
-
-          # Add only the SVG files
-          git add "profile-3d-contrib/*.svg"
-
-          # Commit with detailed message
-          git commit -m "🗃️ Generate 3D Contribution Calendar
-
-          Generated on: $(date -u)
-          Files changed: $(git diff --cached --numstat | wc -l)
-
-          This is an automated commit by GitHub Actions." || echo "No changes to commit"
-
-          # Push with specific refspec
-          git push origin main
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A .
+          git commit -m "Generated 3D Contribution Calendar 🗃️" || echo "No changes to commit"
+          git push
