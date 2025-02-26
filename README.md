@@ -156,7 +156,7 @@ const altaf = {
 
 <div align="center" style="margin: 20px 0;">
   <img width="49%" height="195px" src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=altafempaxis&show_icons=true&theme=tokyonight&hide_border=true&bg_color=1a1b27&title_color=70a5fd&icon_color=bf91f3&text_color=38bdae&ring_color=70a5fd" alt="GitHub Stats"/>
-  <img width="49%" height="195px" src="https://streak-stats.demolab.com?user=altafempaxis&theme=tokyonight&hide_border=true&background=1a1b27&ring=70a5fd&fire=bf91f3&currStreakLabel=38bdae" alt="GitHub Streak"/>
+  <img width="49%" height="195px" src="https://github-readme-streak-stats.herokuapp.com?user=altafempaxis&theme=tokyonight&hide_border=true&border_radius=0&background=1a1b27&ring=70a5fd&fire=bf91f3&currStreakLabel=38bdae&sideLabels=70a5fd&dates=38bdae" alt="GitHub Streak"/>
 </div>
 
 <!-- Contribution Graph -->
@@ -173,21 +173,14 @@ const altaf = {
     3D Contribution Calendar
   </h3>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-night-rainbow.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="profile-3d-contrib/profile-night-green.svg"/>
-    <img src="profile-3d-contrib/profile-night-rainbow.svg" width="98%" alt="3D Contribution Calendar" onerror="this.style.display='none'"/>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/altafempaxis/altafempaxis/main/profile-3d-contrib/profile-night-rainbow.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/altafempaxis/altafempaxis/main/profile-3d-contrib/profile-night-green.svg"/>
+    <img src="https://raw.githubusercontent.com/altafempaxis/altafempaxis/main/profile-3d-contrib/profile-night-rainbow.svg" width="98%" alt="3D Contribution Calendar"/>
   </picture>
-  <!-- Fallback message -->
-  <p id="calendar-fallback" style="display: none; color: #70a5fd; margin-top: 10px;">
-    🔄 3D Contribution Calendar is generating... Please check back in a few minutes.
+  <p align="center">
+    <i>If the calendar is not visible, it's still generating. Please check back in a few minutes.</i>
   </p>
 </div>
-<script>
-  // Show fallback message if image fails to load
-  document.querySelector('.calendar-img').addEventListener('error', function() {
-    document.getElementById('calendar-fallback').style.display = 'block';
-  });
-</script>
 
 <!-- GitHub Trophies -->
 <div align="center" style="margin: 30px 0;">
