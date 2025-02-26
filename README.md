@@ -165,7 +165,11 @@ const altaf = {
 <!-- 3D Contribution Calendar -->
 <div align="center" style="margin: 20px 0;">
   <h3 align="center">📅 3D Contribution Calendar</h3>
-  <img src="./profile-3d-contrib/profile-night-rainbow.svg" width="98%" alt="3D Contribution Calendar"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/profile-night-green.svg"/>
+    <img src="./profile-3d-contrib/profile-night-rainbow.svg" width="98%" alt="3D Contribution Calendar"/>
+  </picture>
 </div>
 
 <!-- GitHub Trophies -->

@@ -14,22 +14,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Create settings file
+        run: |
+          echo '{
+            "type": "tokyo",
+            "colors": {
+              "h1": "#70a5fd",
+              "h2": "#bf91f3",
+              "h3": "#38bdae",
+              "h4": "#1a1b27"
+            }
+          }' > settings.json
+
       - name: Generate 3D Contribution Calendar
         uses: yoshi389111/github-profile-3d-contrib@0.7.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
           MAX_REPOS: 250
-          SETTING_JSON: |
-            {
-              "type": "tokyo",
-              "colors": {
-                "h1": "#70a5fd",
-                "h2": "#bf91f3",
-                "h3": "#38bdae",
-                "h4": "#1a1b27"
-              }
-            }
+          SETTING_JSON: settings.json
 
       - name: Commit & Push
         run: |
